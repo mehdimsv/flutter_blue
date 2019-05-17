@@ -50,7 +50,12 @@ class FlutterBlue {
         .then((buffer) => new protos.BluetoothState.fromBuffer(buffer))
         .then((s) => BluetoothState.values[s.state.value]);
   }
-
+Future<bool> requestMtu(int size,String uuid) async {
+    return await FlutterBlue.instance._channel.invokeMethod("requestMtu", {
+      "size": size,
+      "remoteId": uuid,
+    });
+  }
   /// Occurs when the bluetooth state has changed
   Stream<BluetoothState> onStateChanged() {
     return _stateChannel
