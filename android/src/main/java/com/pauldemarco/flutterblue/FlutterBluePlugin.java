@@ -129,7 +129,6 @@ public class FlutterBluePlugin implements MethodCallHandler, RequestPermissionsR
                 }
 
                 Integer size = call.argument("size");
-                String remoteId = call.argument("remoteId");
                 if (size == null) {
                     result.error(
                             "ValueError",
@@ -138,16 +137,7 @@ public class FlutterBluePlugin implements MethodCallHandler, RequestPermissionsR
                     );
                     return;
                 }
-
-                BluetoothGatt gattServer;
-                try {
-                    gattServer = locateGatt(remoteId);
-                } catch (Exception e) {
-                    result.error("read_characteristic_error", e.getMessage(), null);
-                    return;
-                }
-
-                result.success(gattServer.requestMtu(size));
+                result.success(mGattServers.requestMtu(size));
                 break;
             }
             case "state":

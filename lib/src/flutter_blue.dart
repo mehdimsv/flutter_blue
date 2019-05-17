@@ -52,8 +52,7 @@ class FlutterBlue {
   }
 Future<bool> requestMtu(int size,String uuid) async {
     return await FlutterBlue.instance._channel.invokeMethod("requestMtu", {
-      "size": size,
-      "remoteId": uuid,
+      "size": size
     });
   }
   /// Occurs when the bluetooth state has changed
